@@ -1,6 +1,7 @@
 
 import unittest
 
+from geopy.compat import u
 from geopy.geocoders import Geoclient
 from test.geocoders.util import GeocoderTestBase, env
 
