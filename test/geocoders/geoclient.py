@@ -5,7 +5,7 @@ from geopy.compat import u
 from geopy.geocoders import Geoclient
 from test.geocoders.util import GeocoderTestBase, env
 
-class GeoclientTestCaseUnitTest(GeocoderTestBase):
+class GeoclientTestCaseUnitTest(GeocoderTestBase):  # pylint: disable=R0904,C0111
 
     def test_user_agent_custom(self):
         geocoder = Geoclient(
