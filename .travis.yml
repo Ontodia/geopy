@@ -1,4 +1,8 @@
 language: python
+env:
+  global:
+    - GEOCLIENT_APP_KEY=bb80a97381a0fa916bb860768fa71b8f
+    - GEOCLIENT_APP_ID=e7df1765
 python:
     - "2.7"
     - "3.2"
