@@ -19,8 +19,8 @@ class GeoclientTestCaseUnitTest(GeocoderTestBase):  # pylint: disable=R0904,C011
 
 
 @unittest.skipUnless( # pylint: disable=R0904,C0111
-    bool(env.get('GEOCLIENT_APP_ID')) and bool(env.get('GEOCLIENT_APP_KEY')),
-    "No GEOCLIENT_APP_ID and GEOCLIENT_APP_KEY env variables set"
+    bool(env.get('GEOCLIENT_APP_KEY')),
+    "No GEOCLIENT_APP_KEY env variables set"
 )
 class GeoclientTestCase(GeocoderTestBase): # pylint: disable=R0904,C0111
 
