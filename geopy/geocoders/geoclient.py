@@ -59,24 +59,23 @@ class Geoclient(Geocoder):
         self.app_id = app_id
         self.app_key = app_key
         self.domain = domain.strip('/')
-        
-        if domain == DEFAULT_DOMAIN:
-            if not app_id:
+        self.scheme = scheme
+
+        if app_id or app_key or domain == DEFAULT_DOMAIN:
+            if not (app_id and app_key and domain == DEFAULT_DOMAIN):
                 raise ConfigurationError(
-                    'No app_id given, required for api access.  If you do not '
-                    'have a Geoclient app_id, sign up here: '
+                    'app_id and app_key required for NYC Geoclient API access. '
+                    'If you don not have a Geoclient app_id, sign up here: '
                     'https://developer.cityofnewyork.us/api/geoclient-api'
-                    )
-            
-            if not app_key:
+                )
+            if self.scheme != 'https':
                 raise ConfigurationError(
-                    'No app_key given, required for api access.  If you do not '
-                    'have a Geoclient app_key, sign up here: '
-                    'https://developer.cityofnewyork.us/api/geoclient-api'
-                    )
+                    "Authenticated mode requires scheme of 'https'"
+                )
         
         '''use SFS (Single-field search) endpoint'''
-        self.geocode_api = '%s://%s/search.json' % (DEFAULT_SCHEME, self.domain)
+        self.geocode_api = '%s://%s/search.json' % (self.scheme, self.domain)
+
 
     def geocode(
             self,
