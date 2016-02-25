@@ -4,6 +4,8 @@ import unittest
 from geopy.compat import u
 from geopy.geocoders import Geoclient
 from test.geocoders.util import GeocoderTestBase, env
+from __future__ import print_function
+import sys
 
 class GeoclientTestCaseUnitTest(GeocoderTestBase):  # pylint: disable=R0904,C0111
 
@@ -24,10 +26,11 @@ class GeoclientTestCase(GeocoderTestBase): # pylint: disable=R0904,C0111
 
     @classmethod
     def setUpClass(cls):
-        cls.geocoder = Geoclient(
-            app_id=env.get('GEOCLIENT_APP_ID'),
-            app_key=env.get('GEOCLIENT_APP_KEY'),
-        )
+        app_id=env.get('GEOCLIENT_APP_ID')
+        app_key=env.get('GEOCLIENT_APP_KEY')
+        print("app_id: ", app_id, file=sys.stderr)
+        print("app_key: ", app_key, file=sys.stderr)
+        cls.geocoder = Geoclient(app_id, app_key)
         cls.delta = 0.04
 
     def test_geocode_address(self):
