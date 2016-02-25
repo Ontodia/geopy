@@ -18,9 +18,10 @@ class GeoclientTestCaseUnitTest(GeocoderTestBase):  # pylint: disable=R0904,C011
         self.assertEqual(geocoder.headers['User-Agent'], 'my_user_agent/1.0')
 
 
-@unittest.skipUnless( # pylint: disable=R0904,C0111
-    bool(env.get('GEOCLIENT_APP_KEY')),
-    "No GEOCLIENT_APP_KEY env variables set"
+@unittest.skipUnless(  # pylint: disable=R0904,C0111
+    bool(env.get('GEOCLIENT_APP_KEY')) and \
+    bool(env.get('GEOCLIENT_APP_ID')),
+    "No GEOCLIENT_APP_KEY and GEOCLIENT_APP_ID env variables set"
 )
 class GeoclientTestCase(GeocoderTestBase): # pylint: disable=R0904,C0111
 
