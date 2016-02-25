@@ -1,11 +1,11 @@
 
+from __future__ import print_function
+import sys
 import unittest
 
 from geopy.compat import u
 from geopy.geocoders import Geoclient
 from test.geocoders.util import GeocoderTestBase, env
-from __future__ import print_function
-import sys
 
 class GeoclientTestCaseUnitTest(GeocoderTestBase):  # pylint: disable=R0904,C0111
 
