@@ -64,8 +64,8 @@ class Geoclient(Geocoder):
         if app_id or app_key or domain == DEFAULT_DOMAIN:
             if not (app_id and app_key and domain == DEFAULT_DOMAIN):
                 raise ConfigurationError(
-                    'app_id and app_key required for NYC Geoclient API access. '
-                    'If you don not have a Geoclient app_id, sign up here: '
+                    'app_id(' + app_id +') and app_key(' + app_key + ') required for NYC Geoclient API access. '
+                    'If you don not have a Geoclient access, sign up here: '
                     'https://developer.cityofnewyork.us/api/geoclient-api'
                 )
             if self.scheme != 'https':
