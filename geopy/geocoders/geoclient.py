@@ -12,7 +12,8 @@ from geopy.exc import ConfigurationError
 
 __all__ = ("Geoclient", )
 
-DEFAULT_DOMAIN = 'api.cityofnewyork.us/geoclient/v1'
+DEFAULT_ENDPOINT = 'api.cityofnewyork.us/geoclient'
+DEFAULT_ENDPOINT_VERSION = 'v1'
 
 class Geoclient(Geocoder):
     """
@@ -30,7 +31,7 @@ class Geoclient(Geocoder):
             app_id=None,
             app_key=None,
             scheme=DEFAULT_SCHEME,
-            domain=DEFAULT_DOMAIN,
+            domain=DEFAULT_ENDPOINT + '/' + DEFAULT_ENDPOINT_VERSION,
             timeout=DEFAULT_TIMEOUT,
             proxies=None,
             user_agent=None,
@@ -53,16 +54,14 @@ class Geoclient(Geocoder):
 
         """
         super(Geoclient, self).__init__(
-            scheme=scheme, timeout=timeout, proxies=proxies, user_agent=user_agent
+            app_id=app_id, app_key=app_key, scheme=scheme, timeout=timeout, proxies=proxies, user_agent=user_agent
         )
 
-        self.app_id = app_id
-        self.app_key = app_key
         self.domain = domain.strip('/')
         self.scheme = scheme
 
-        if app_id or app_key or domain == DEFAULT_DOMAIN:
-            if not (app_id and app_key and domain == DEFAULT_DOMAIN):
+        if app_id or app_key or domain.startswith(DEFAULT_ENDPOINT):
+            if not (app_id and app_key and domain.startswith(DEFAULT_ENDPOINT) ):
                 raise ConfigurationError(
                     'app_id and app_key required for NYC Geoclient API access. '
                     'If you don not have a Geoclient access, sign up here: '
