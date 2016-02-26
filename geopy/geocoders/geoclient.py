@@ -54,9 +54,11 @@ class Geoclient(Geocoder):
 
         """
         super(Geoclient, self).__init__(
-            app_id=app_id, app_key=app_key, scheme=scheme, timeout=timeout, proxies=proxies, user_agent=user_agent
+            scheme=scheme, timeout=timeout, proxies=proxies, user_agent=user_agent
         )
 
+        self.app_id = app_id
+        self.app_key = app_key
         self.domain = domain.strip('/')
         self.scheme = scheme
 
@@ -145,8 +147,12 @@ class Geoclient(Geocoder):
                 '''for BBL, BIN, BLOCKFACE and INTERSECTION request types, just pass through the request value'''
                 location = place.get('request', '')
                 
-            latitude = response_info.get('latitude', None)
-            longitude = response_info.get('longitude', None)
+            if request_type == 'bin':
+                latitude = response_info.get('latitudeInternalLabel', None)
+                longitude = response_info.get('longitudeInternalLabel', None)
+            else:
+                latitude = response_info.get('latitude', None)
+                longitude = response_info.get('longitude', None)
             
             if latitude and longitude:
                 latitude = float(latitude)
